@@ -76,7 +76,7 @@ int (*sceDebugDisableInfoDumpForKernel)(int flags);
 
 int (*sceKernelSysrootGetShellPidForDriver)(void);
 
-DECL_FUNC_HOOK(SceDebugForDriver_D9703808, int level, int flags, void *ctx, char *str, ...)
+DECL_FUNC_HOOK(ksceKernelPrintfLevelWithInfo, int level, int flags, void *ctx, char *str, ...)
 {
   //  int ret = TAI_CONTINUE(int, SceDebugForDriver_D9703808HookRef, level, flags, ctx, str);
 
@@ -380,7 +380,7 @@ int NetLoggingMgrInit(void)
     goto end;
   }
 
-  BIND_FUNC_EXPORT_HOOK(SceDebugForDriver_D9703808, KERNEL_PID, "SceSysmem", 0x88758561, 0xD9703808);
+  BIND_FUNC_EXPORT_HOOK(ksceKernelPrintfLevelWithInfo, KERNEL_PID, "SceSysmem", 0x88758561, 0xD9703808);
 
   sceDebugSetHandlersForKernel(KernelDebugPrintfCallback, 0);
   sceDebugRegisterPutcharHandlerForKernel(UserDebugPrintfCallback, 0);
